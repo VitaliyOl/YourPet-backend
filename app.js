@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
+const newsRouter = require("./routes/news");
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
-
+app.use("/api/news", newsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
