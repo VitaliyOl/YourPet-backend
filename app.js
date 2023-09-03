@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
 const newsRouter = require("./routes/news");
+const petsRouter = require("./routes/notice");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api/news", newsRouter);
+app.use("/api/notices", petsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
