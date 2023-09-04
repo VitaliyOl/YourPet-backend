@@ -51,6 +51,10 @@ const getNotices = async (req, res, next) => {
     }
 
     const totalCount = await Notice.countDocuments(totalCountQuery);
+    const paginationLimit = parseInt(req.query.limit);
+
+    const totalPages =
+      totalCount === 0 ? 1 : Math.ceil(totalCount / paginationLimit);
 
     const pets = await Notice.find({ title: regex, ...conditions })
       .skip((page - 1) * limit)
@@ -60,7 +64,7 @@ const getNotices = async (req, res, next) => {
       return next(createError(404, "No pets found"));
     }
 
-    res.status(200).json({ pets, page, total: totalCount });
+    res.status(200).json({ pets, page, total: totalPages });
   } catch (error) {
     next(error);
   }
