@@ -52,15 +52,15 @@ const getNotices = async (req, res, next) => {
 
     const totalCount = await Notice.countDocuments(totalCountQuery);
 
-    const result = await Notice.find({ title: regex, ...conditions })
+    const pets = await Notice.find({ title: regex, ...conditions })
       .skip((page - 1) * limit)
       .limit(limit);
 
-    if (result.length === 0) {
+    if (pets.length === 0) {
       return next(createError(404, "No pets found"));
     }
 
-    res.status(200).json({ result, page, total: totalCount });
+    res.status(200).json({ pets, page, total: totalCount });
   } catch (error) {
     next(error);
   }
