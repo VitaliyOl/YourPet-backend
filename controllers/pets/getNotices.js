@@ -4,7 +4,7 @@ const createError = require("http-errors");
 
 const getNotices = async (req, res, next) => {
   try {
-    const { title, category, page = 1, limit = 4, date, sex } = req.query;
+    const { title, category, page = 1, limit, date, sex } = req.query;
 
     const conditions = {};
 
